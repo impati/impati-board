@@ -1,0 +1,4 @@
+= 에러 응답
+
+include::{snippets}/error/response-body.adoc[]
+include::{snippets}/error/response-fields.adoc[]

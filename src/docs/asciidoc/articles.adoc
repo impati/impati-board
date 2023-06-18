@@ -1,0 +1,73 @@
+= impati-board
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+== 게시글 페이징 조회
+
+=== 게시글 페이징 조회 요청
+
+include::{snippets}/article/http-request.adoc[]
+include::{snippets}/article/request-parameters.adoc[]
+include::{snippets}/article/request-fields.adoc[]
+
+=== 게시글 페이징 조회 응답
+
+include::{snippets}/article/http-response.adoc[]
+include::{snippets}/article/response-fields.adoc[]
+
+== 게시글 단일 조회
+
+=== 게시글 단일 조회 요청
+
+include::{snippets}/article/search/http-request.adoc[]
+include::{snippets}/article/search/path-parameters.adoc[]
+include::{snippets}/article/search/request-headers.adoc[]
+
+=== 게시글 단일 조회 응답
+
+include::{snippets}/article/search/http-response.adoc[]
+include::{snippets}/article/search/response-fields.adoc[]
+
+== 게시글 등록
+
+=== 게시글 등록 요청
+
+include::{snippets}/article/post/http-request.adoc[]
+include::{snippets}/article/post/request-headers.adoc[]
+include::{snippets}/article/post/request-fields.adoc[]
+
+=== 게시글 등록 응답
+
+include::{snippets}/article/post/http-response.adoc[]
+include::{snippets}/article/post/response-fields.adoc[]
+
+== 게시글 수정
+
+=== 게시글 수정 요청
+
+include::{snippets}/article/edit/http-request.adoc[]
+include::{snippets}/article/edit/path-parameters.adoc[]
+include::{snippets}/article/edit/request-headers.adoc[]
+include::{snippets}/article/edit/request-fields.adoc[]
+
+=== 게시글 수정 응답
+
+include::{snippets}/article/edit/http-response.adoc[]
+include::{snippets}/article/edit/response-fields.adoc[]
+
+== 게시글 삭제
+
+=== 게시글 삭제 요청
+
+include::{snippets}/article/remove/http-request.adoc[]
+include::{snippets}/article/remove/path-parameters.adoc[]
+include::{snippets}/article/remove/request-headers.adoc[]
+
+=== 게시글 삭제 응답
+
+include::{snippets}/article/remove/http-response.adoc[]
+include::{snippets}/article/remove/response-fields.adoc[]

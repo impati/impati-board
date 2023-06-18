@@ -1,0 +1,62 @@
+= impati-board
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+== 댓글 조회
+
+=== 댓글 요청
+
+include::{snippets}/comment/search/http-request.adoc[]
+include::{snippets}/comment/search/path-parameters.adoc[]
+include::{snippets}/comment/search/request-headers.adoc[]
+
+=== 댓글 응답
+
+include::{snippets}/comment/search/http-response.adoc[]
+include::{snippets}/comment/search/response-fields.adoc[]
+
+== 댓글 등록
+
+=== 댓글 등록 요청
+
+include::{snippets}/comment/register/http-request.adoc[]
+include::{snippets}/comment/register/path-parameters.adoc[]
+include::{snippets}/comment/register/request-headers.adoc[]
+include::{snippets}/comment/register/request-fields.adoc[]
+
+
+=== 댓글 등록 응답
+
+include::{snippets}/comment/register/http-response.adoc[]
+include::{snippets}/comment/register/response-fields.adoc[]
+
+== 댓글 수정
+
+=== 댓글 수정 요청
+
+include::{snippets}/comment/edit/http-request.adoc[]
+include::{snippets}/comment/edit/path-parameters.adoc[]
+include::{snippets}/comment/edit/request-headers.adoc[]
+include::{snippets}/comment/edit/request-fields.adoc[]
+
+=== 댓글 수정 응답
+
+include::{snippets}/comment/edit/http-response.adoc[]
+include::{snippets}/comment/edit/response-fields.adoc[]
+
+== 댓글 삭제
+
+=== 댓글 삭제 요청
+
+include::{snippets}/comment/delete/http-request.adoc[]
+include::{snippets}/comment/delete/path-parameters.adoc[]
+include::{snippets}/comment/delete/request-headers.adoc[]
+
+=== 댓글 삭제 응답
+
+include::{snippets}/comment/delete/http-response.adoc[]
+include::{snippets}/comment/delete/response-fields.adoc[]
