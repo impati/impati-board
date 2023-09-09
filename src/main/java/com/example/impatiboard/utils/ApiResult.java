@@ -7,36 +7,36 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ApiResult<T> {
 
-    private T data;
+	private T data;
 
-    private ErrorData error;
+	private ErrorData error;
 
-    ApiResult(T data) {
-        this.data = data;
-    }
+	ApiResult(final T data) {
+		this.data = data;
+	}
 
-    ApiResult(int status, String message) {
-        this.data = null;
-        this.error = new ErrorData(status, message);
-    }
+	ApiResult(final int status, final String message) {
+		this.data = null;
+		this.error = new ErrorData(status, message);
+	}
 
-    public static <T> ApiResult<T> succeed(T data) {
-        return new ApiResult<>(data);
-    }
+	public static <T> ApiResult<T> succeed(final T data) {
+		return new ApiResult<>(data);
+	}
 
-    public static ApiResult<String> succeed() {
-        return new ApiResult<>("Success");
-    }
+	public static ApiResult<String> succeed() {
+		return new ApiResult<>("Success");
+	}
 
-    public static <T> ApiResult<T> failed(int status, String message) {
-        return new ApiResult<>(status, message);
-    }
+	public static <T> ApiResult<T> failed(final int status, final String message) {
+		return new ApiResult<>(status, message);
+	}
 
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    static class ErrorData {
-        private int status;
-        private String message;
-    }
+	@Getter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	static class ErrorData {
+		private int status;
+		private String message;
+	}
 }
