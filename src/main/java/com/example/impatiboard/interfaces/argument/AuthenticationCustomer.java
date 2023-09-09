@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthenticationCustomer implements Customer {
+
     private Long id;
     private String username;
     private String nickname;

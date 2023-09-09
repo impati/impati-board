@@ -1,5 +1,20 @@
 package com.example.impatiboard.interfaces;
 
+import javax.validation.Valid;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.impatiboard.interfaces.argument.AuthenticationCustomer;
 import com.example.impatiboard.interfaces.argument.Customer;
 import com.example.impatiboard.interfaces.request.ArticleEditRequest;
@@ -12,14 +27,9 @@ import com.example.impatiboard.services.article.ArticleFinder;
 import com.example.impatiboard.services.article.ArticleRegister;
 import com.example.impatiboard.services.article.ArticleRemover;
 import com.example.impatiboard.utils.ApiResult;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -27,46 +37,68 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/articles")
 public class ArticleController {
 
-    private final ArticleFinder articleFinder;
-    private final ArticleRegister articleRegister;
-    private final ArticleEditor articleEditor;
-    private final ArticleRemover articleRemover;
+	private final ArticleFinder articleFinder;
+	private final ArticleRegister articleRegister;
+	private final ArticleEditor articleEditor;
+	private final ArticleRemover articleRemover;
 
-    @PostMapping
-    public ApiResult<Page<ArticleResponse>> searchArticles(@RequestBody ArticleSearchRequest request,
-                                                           @PageableDefault Pageable pageable) {
-        Page<ArticleResponse> response = articleFinder
-                .search(request.toCondition(pageable))
-                .map(ArticleResponse::from);
-        return ApiResult.succeed(response);
-    }
+	@PostMapping
+	public ApiResult<Page<ArticleResponse>> searchArticles(
+		@RequestBody final ArticleSearchRequest request,
+		@PageableDefault final Pageable pageable
+	) {
+		final Page<ArticleResponse> response = articleFinder
+			.search(request.toCondition(pageable))
+			.map(ArticleResponse::from);
 
-    @GetMapping("/{articleId}")
-    public ApiResult<ArticleSpecificResponse> searchArticle(@PathVariable Long articleId,
-                                                            Customer customer) {
-        ArticleSpecificResponse response = ArticleSpecificResponse.of(articleFinder.search(articleId), customer);
-        return ApiResult.succeed(response);
-    }
+		return ApiResult.succeed(response);
+	}
 
-    @PutMapping
-    public ApiResult<String> postArticles(@Valid @RequestBody ArticleRegistrationRequest request,
-                                          AuthenticationCustomer authenticationCustomer) {
-        articleRegister.registration(request.toEntity(authenticationCustomer.getId(), authenticationCustomer.getNickname()));
-        return ApiResult.succeed();
-    }
+	@GetMapping("/{articleId}")
+	public ApiResult<ArticleSpecificResponse> searchArticle(
+		final @PathVariable Long articleId,
+		final Customer customer
+	) {
+		final ArticleSpecificResponse response = ArticleSpecificResponse.of(articleFinder.search(articleId), customer);
 
-    @PatchMapping("/{articleId}")
-    public ApiResult<ArticleResponse> editArticle(@PathVariable Long articleId,
-                                                  @Valid @RequestBody ArticleEditRequest request,
-                                                  AuthenticationCustomer authenticationCustomer) {
-        ArticleResponse response = ArticleResponse.from(articleEditor.edit(request.toCondition(articleId), authenticationCustomer.getId()));
-        return ApiResult.succeed(response);
-    }
+		return ApiResult.succeed(response);
+	}
 
-    @DeleteMapping("/{articleId}")
-    public ApiResult<String> removeArticle(@PathVariable Long articleId,
-                                           AuthenticationCustomer authenticationCustomer) {
-        articleRemover.remove(articleId, authenticationCustomer.getId());
-        return ApiResult.succeed();
-    }
+	@PutMapping
+	public ApiResult<String> postArticles(
+		@Valid @RequestBody final ArticleRegistrationRequest request,
+		final AuthenticationCustomer authenticationCustomer
+	) {
+		articleRegister.registration(
+			request.toEntity(
+				authenticationCustomer.getId(),
+				authenticationCustomer.getNickname()
+			)
+		);
+
+		return ApiResult.succeed();
+	}
+
+	@PatchMapping("/{articleId}")
+	public ApiResult<ArticleResponse> editArticle(
+		@PathVariable final Long articleId,
+		@Valid @RequestBody final ArticleEditRequest request,
+		final AuthenticationCustomer authenticationCustomer
+	) {
+		final ArticleResponse response = ArticleResponse.from(
+			articleEditor.edit(request.toCondition(articleId), authenticationCustomer.getId())
+		);
+
+		return ApiResult.succeed(response);
+	}
+
+	@DeleteMapping("/{articleId}")
+	public ApiResult<String> removeArticle(
+		@PathVariable final Long articleId,
+		final AuthenticationCustomer authenticationCustomer
+	) {
+		articleRemover.remove(articleId, authenticationCustomer.getId());
+
+		return ApiResult.succeed();
+	}
 }
